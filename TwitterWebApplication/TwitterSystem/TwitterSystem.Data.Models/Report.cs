@@ -23,7 +23,7 @@
         public int TweetId { get; set; }
 
         [ForeignKey("TweetId")]
-        public Tweet Tweet { get; set; }
+        public virtual Tweet Tweet { get; set; }
 
         [Required]
         public string UserId { get; set; }

@@ -47,7 +47,7 @@
 
         public virtual ICollection<User> Followings
         {
-            get { return this.followers; }
+            get { return this.followings; }
             set { this.followings = value; }
         }
 

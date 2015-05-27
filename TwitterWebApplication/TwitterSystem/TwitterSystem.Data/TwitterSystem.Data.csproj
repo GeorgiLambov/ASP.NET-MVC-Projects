@@ -63,7 +63,7 @@
     <Compile Include="Contracts\ITweeterData.cs" />
     <Compile Include="Contracts\ITwitterDbContext.cs" />
     <Compile Include="GenericRepository.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\TweeterDbMigrationConfiguration.cs" />
     <Compile Include="TweeterData.cs" />
     <Compile Include="TwitterDbContext.cs" />
   </ItemGroup>

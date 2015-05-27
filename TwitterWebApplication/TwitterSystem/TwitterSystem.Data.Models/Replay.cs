@@ -15,7 +15,7 @@
         public string AuthorId { get; set; }
 
         [ForeignKey("AuthorId")]
-        public User Author { get; set; }
+        public virtual User Author { get; set; }
 
         [Required]
         public int TweetId { get; set; }

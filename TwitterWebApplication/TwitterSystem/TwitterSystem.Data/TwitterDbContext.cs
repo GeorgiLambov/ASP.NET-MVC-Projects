@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
     using Contracts;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Models;
@@ -11,6 +12,13 @@
         public TwitterDbContext()
             : base("DefaultConnection")
         {
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            //  remove all CASCADE DELETES
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
         public static TwitterDbContext Create()
@@ -28,7 +36,7 @@
 
         public IDbSet<T> Set<T>() where T : class
         {
-            throw new NotImplementedException();
+            return base.Set<T>();
         }
     }
 }
