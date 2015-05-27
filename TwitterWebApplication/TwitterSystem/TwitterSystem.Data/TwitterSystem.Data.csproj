@@ -56,11 +56,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Contracts\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TwitterSystemDbContext.cs" />
+    <Compile Include="Contracts\IRepository.cs" />
+    <Compile Include="Contracts\ITweeterData.cs" />
+    <Compile Include="Contracts\ITwitterDbContext.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="TweeterData.cs" />
+    <Compile Include="TwitterDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
