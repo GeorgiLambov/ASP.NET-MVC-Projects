@@ -6,8 +6,15 @@ using System.Web.Mvc;
 
 namespace TwitterSystem.Web.Controllers
 {
-    public class HomeController : Controller
+    using Data.Contracts;
+
+    public class HomeController : BaseController
     {
+        public HomeController(ITweeterData data)
+            : base(data)
+        {
+        }
+
         public ActionResult Index()
         {
             return View();

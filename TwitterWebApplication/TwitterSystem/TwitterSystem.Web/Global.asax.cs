@@ -12,7 +12,7 @@
     {
         protected void Application_Start()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TwitterDbContext, TweeterDbMigrationConfiguration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<TweetterDbContext, TweeterDbMigrationConfiguration>());
             
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

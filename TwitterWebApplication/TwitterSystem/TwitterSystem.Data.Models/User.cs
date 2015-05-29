@@ -13,7 +13,7 @@
         private ICollection<Tweet> tweets;
         private ICollection<Notification> notifications;
         private ICollection<Tweet> retweetTweets;
-        private ICollection<Tweet> favouriteTweets;
+        private ICollection<Tweet> favoritedTweets;
         private ICollection<Replay> replays;
         private ICollection<Report> reports;
 
@@ -24,7 +24,7 @@
             this.tweets = new HashSet<Tweet>();
             this.notifications = new HashSet<Notification>();
             this.retweetTweets = new HashSet<Tweet>();
-            this.favouriteTweets = new HashSet<Tweet>();
+            this.favoritedTweets = new HashSet<Tweet>();
             this.replays = new HashSet<Replay>();
             this.reports = new HashSet<Report>();
         }
@@ -69,10 +69,10 @@
             set { this.retweetTweets = value; }
         }
 
-        public virtual ICollection<Tweet> FavouriteTweets
+        public virtual ICollection<Tweet> FavoritedTweets
         {
-            get { return this.favouriteTweets; }
-            set { this.favouriteTweets = value; }
+            get { return this.favoritedTweets; }
+            set { this.favoritedTweets = value; }
         }
 
         public virtual ICollection<Replay> Replays
@@ -86,6 +86,5 @@
             get { return this.reports; }
             set { this.reports = value; }
         }
-
     }
 }

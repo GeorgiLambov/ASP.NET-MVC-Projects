@@ -4,7 +4,7 @@ namespace TwitterSystem.Data.Migrations
     using System.Linq;
     using Models;
 
-    public sealed class TweeterDbMigrationConfiguration : DbMigrationsConfiguration<TwitterDbContext>
+    public sealed class TweeterDbMigrationConfiguration : DbMigrationsConfiguration<TweetterDbContext>
     {
         public TweeterDbMigrationConfiguration()
         {
@@ -12,7 +12,7 @@ namespace TwitterSystem.Data.Migrations
             this.AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(TwitterDbContext context)
+        protected override void Seed(TweetterDbContext context)
         {
             if (!context.Users.Any())
             {
