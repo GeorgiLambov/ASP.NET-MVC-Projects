@@ -1,37 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace TwitterSystem.Web.Controllers
+﻿namespace TwitterSystem.Web.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Web.Mvc;
+    using AutoMapper.QueryableExtensions;
     using Data.Contracts;
+    using ViewModels;
+    using ViewModels.Tweets;
 
     public class HomeController : BaseController
     {
+        private const int pageSize = 10;
+
         public HomeController(ITweeterData data)
             : base(data)
         {
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            return View();
-        }
+            
+            //if (this.User.IsLoggedIn())
+            //{
+                
+            //}
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            var totalPages = (int)Math.Ceiling(this.Data.Tweets.All().Count() / (decimal)pageSize);
+            var latestTweets = this.Data.Tweets
+                .All()
+                .OrderByDescending(t => t.DateOfCreate)
+                .Skip(pageSize * (page - 1))
+                .Take(pageSize)
+                .Project()
+                .To<TweetViewModel>();
 
-            return View();
-        }
+            var homeViewModel = new HomeViewModel
+            {
+                Tweets = latestTweets,
+                PaginationModel = new PaginationViewModel
+                {
+                    CurrentPage = page,
+                    TotalPages = totalPages
+                }
+            };
 
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return this.View(homeViewModel);
         }
     }
 }

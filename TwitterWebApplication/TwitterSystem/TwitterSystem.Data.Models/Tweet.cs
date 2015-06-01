@@ -3,48 +3,55 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Tweet
     {
-        private ICollection<User> usersFavorites;
-        private ICollection<User> usersReTweets;
+        private ICollection<User> favouredByUsersUsers;
         private ICollection<Report> reports;
-        private ICollection<Replay> replays;
+        private ICollection<Tweet> replies;
+        private ICollection<Tweet> retweets;
 
         public Tweet()
         {
-            this.CreateOn = DateTime.Now;
-            this.usersFavorites = new HashSet<User>();
-            this.usersReTweets = new HashSet<User>();
+            this.favouredByUsersUsers = new HashSet<User>();
             this.reports = new HashSet<Report>();
-            this.replays = new HashSet<Replay>();
+            this.replies = new HashSet<Tweet>();
+            this.retweets = new HashSet<Tweet>();
         }
 
         [Key]
         public int Id { get; set; }
 
         [Required]
-        public string AuthorId { get; set; }
-
-        [ForeignKey("AuthorId")]
-        public virtual User Author { get; set; }
+        public DateTime DateOfCreate { get; set; }
 
         [Required]
+        [MinLength(2)]
         public string Text { get; set; }
 
-        public DateTime CreateOn { get; set; }
+        [Required]
+        public int RetweetCount { get; set; }
 
-        public virtual ICollection<User> UsersFavorites
-        {
-            get { return this.usersFavorites; }
-            set { this.usersFavorites = value; }
-        }
+        [Required]
+        public int SharedCount { get; set; }
 
-        public virtual ICollection<User> UsersReTweets
+        [Required]
+        public string OwnerId { get; set; }
+
+        public virtual User Owner { get; set; }
+
+        public int? RepliedToTweetId { get; set; }
+
+        public virtual Tweet RepliedToTweet { get; set; }
+
+        public int? RetweetedFromId { get; set; }
+
+        public virtual Tweet RetweetedFrom { get; set; }
+
+        public virtual ICollection<User> FavouredByUsers
         {
-            get { return this.usersReTweets; }
-            set { this.usersReTweets = value; }
+            get { return this.favouredByUsersUsers; }
+            set { this.favouredByUsersUsers = value; }
         }
 
         public virtual ICollection<Report> Reports
@@ -53,10 +60,16 @@
             set { this.reports = value; }
         }
 
-        public virtual ICollection<Replay> Replays
+        public virtual ICollection<Tweet> Replies
         {
-            get { return this.replays; }
-            set { this.replays = value; }
+            get { return this.replies; }
+            set { this.replies = value; }
+        }
+
+        public virtual ICollection<Tweet> Retweets
+        {
+            get { return this.retweets; }
+            set { this.retweets = value; }
         }
     }
 }

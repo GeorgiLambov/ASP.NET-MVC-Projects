@@ -9,32 +9,24 @@
     public class User : IdentityUser
     {
         private ICollection<User> followers;
-        private ICollection<User> followings;
+        private ICollection<User> following;
         private ICollection<Tweet> tweets;
+        private ICollection<Tweet> favouriteTweets;
+        private ICollection<Message> sentMessages;
+        private ICollection<Message> receivedMessages;
+        private ICollection<Report> reportsSent;
         private ICollection<Notification> notifications;
-        private ICollection<Tweet> retweetTweets;
-        private ICollection<Tweet> favoritedTweets;
-        private ICollection<Replay> replays;
-        private ICollection<Report> reports;
 
         public User()
         {
             this.followers = new HashSet<User>();
-            this.followings = new HashSet<User>();
+            this.following = new HashSet<User>();
             this.tweets = new HashSet<Tweet>();
+            this.favouriteTweets = new HashSet<Tweet>();
+            this.sentMessages = new HashSet<Message>();
+            this.receivedMessages = new HashSet<Message>();
+            this.reportsSent = new HashSet<Report>();
             this.notifications = new HashSet<Notification>();
-            this.retweetTweets = new HashSet<Tweet>();
-            this.favoritedTweets = new HashSet<Tweet>();
-            this.replays = new HashSet<Replay>();
-            this.reports = new HashSet<Report>();
-        }
-
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
         }
 
         public string FullName { get; set; }
@@ -45,10 +37,10 @@
             set { this.followers = value; }
         }
 
-        public virtual ICollection<User> Followings
+        public virtual ICollection<User> Following
         {
-            get { return this.followings; }
-            set { this.followings = value; }
+            get { return this.following; }
+            set { this.following = value; }
         }
 
         public virtual ICollection<Tweet> Tweets
@@ -57,34 +49,39 @@
             set { this.tweets = value; }
         }
 
+        public virtual ICollection<Tweet> FavouriteTweets
+        {
+            get { return this.favouriteTweets; }
+            set { this.favouriteTweets = value; }
+        }
+
+        public virtual ICollection<Message> SentMessages
+        {
+            get { return this.sentMessages; }
+            set { this.sentMessages = value; }
+        }
+
+        public virtual ICollection<Message> ReceivedMessages
+        {
+            get { return this.receivedMessages; }
+            set { this.receivedMessages = value; }
+        }
+
+        public virtual ICollection<Report> ReportsSent
+        {
+            get { return this.reportsSent; }
+            set { this.reportsSent = value; }
+        }
+
         public virtual ICollection<Notification> Notifications
         {
             get { return this.notifications; }
             set { this.notifications = value; }
         }
 
-        public virtual ICollection<Tweet> RetweetTweets
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User> manager)
         {
-            get { return this.retweetTweets; }
-            set { this.retweetTweets = value; }
-        }
-
-        public virtual ICollection<Tweet> FavoritedTweets
-        {
-            get { return this.favoritedTweets; }
-            set { this.favoritedTweets = value; }
-        }
-
-        public virtual ICollection<Replay> Replays
-        {
-            get { return this.replays; }
-            set { this.replays = value; }
-        }
-
-        public virtual ICollection<Report> Reports
-        {
-            get { return this.reports; }
-            set { this.reports = value; }
+            return await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
         }
     }
 }

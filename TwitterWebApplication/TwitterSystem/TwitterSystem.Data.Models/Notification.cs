@@ -17,6 +17,9 @@ namespace TwitterSystem.Data.Models
 
         [Required]
         public string Content { get; set; }
+
+        [Required]
+        public NotificationType Type { get; set; }
         
         [Required]
         public bool IsChecked { get; set; }

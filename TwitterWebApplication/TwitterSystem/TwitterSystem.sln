@@ -7,8 +7,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{9999D03B-F
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B3DA5038-5C73-4472-884E-E707E4317403}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{4E586805-4FE4-404F-A851-9F2E7A44F065}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TwitterSystem.Data", "TwitterSystem.Data", "{FFA7445B-236A-4502-A8B9-B1F221153BC4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TwitterSystem.Data.Models", "TwitterSystem.Data.Models", "{FCB162CD-A848-4AAC-A37C-686E3FDB03D6}"
@@ -18,6 +16,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSystem.Data", "TwitterSystem.Data\TwitterSystem.Data.csproj", "{E3609E3A-74DB-496D-9FAF-27C455ADBE2B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitterSystem.Data.Models", "TwitterSystem.Data.Models\TwitterSystem.Data.Models.csproj", "{8855F20D-846C-4F15-A402-637218A0B160}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Libraries", "External Libraries", "{EC344E55-F1FE-4FEE-9C70-8CAFB3D851A6}"
+	ProjectSection(SolutionItems) = preProject
+		External Libraries\System.Web.Mvc.Expressions.dll = External Libraries\System.Web.Mvc.Expressions.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

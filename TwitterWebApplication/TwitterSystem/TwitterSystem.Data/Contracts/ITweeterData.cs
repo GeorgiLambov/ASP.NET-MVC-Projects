@@ -1,18 +1,21 @@
 ﻿namespace TwitterSystem.Data.Contracts
 {
+    using Microsoft.AspNet.Identity;
     using Models;
 
     public interface ITweeterData
     {
         IRepository<User> Users { get; }
 
-        IRepository<Notification> Notifications { get; }
+        IRepository<Tweet> Tweets { get; }
 
-        IRepository<Replay> Replays { get; }
+        IRepository<Message> Messages { get; }
+
+        IRepository<Notification> Notifications { get; }
 
         IRepository<Report> Reports { get; }
 
-        IRepository<Tweet> Tweets { get; }
+        IUserStore<User> UserStore { get; }
 
         int SaveChanges();
     }

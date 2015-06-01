@@ -5,53 +5,53 @@
     using System.Linq;
     using Contracts;
 
-    public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class GenericRepository<T> : IRepository<T> where T : class
     {
         private ITweeterDbContext dbContext;
-        private IDbSet<TEntity> entitySet;
+        private IDbSet<T> dbSet;
 
         public GenericRepository(ITweeterDbContext dbContext)
         {
             if (dbContext == null)
             {
-                throw new ArgumentNullException("context", "An instance of ITweeterDbContext is required to use this repository.");
+                throw new ArgumentException("An instance of DbContext is required to use this repository.", "context");
             }
 
             this.dbContext = dbContext;
-            this.entitySet = dbContext.Set<TEntity>();
+            this.dbSet = dbContext.Set<T>();
         }
 
-        public IDbSet<TEntity> EntitySet
+        public IDbSet<T> DbSet
         {
-            get { return this.entitySet; }
+            get { return this.dbSet; }
         }
 
-        public IQueryable<TEntity> All()
+        public IQueryable<T> All()
         {
-            return this.entitySet;
+            return this.DbSet;
         }
 
-        public TEntity Find(object id)
+        public T Find(object id)
         {
-            return this.entitySet.Find(id);
+            return this.DbSet.Find(id);
         }
 
-        public void Add(TEntity entity)
+        public void Add(T entity)
         {
             this.ChangeState(entity, EntityState.Added);
         }
 
-        public void Update(TEntity entity)
+        public void Update(T entity)
         {
             this.ChangeState(entity, EntityState.Modified);
         }
 
-        public void Remove(TEntity entity)
+        public void Remove(T entity)
         {
             this.ChangeState(entity, EntityState.Deleted);
         }
 
-        public TEntity Remove(object id)
+        public T Remove(object id)
         {
             var entity = this.Find(id);
             this.Remove(entity);
@@ -63,12 +63,12 @@
             this.dbContext.SaveChanges();
         }
 
-        private void ChangeState(TEntity entity, EntityState state)
+        private void ChangeState(T entity, EntityState state)
         {
             var entry = this.dbContext.Entry(entity);
             if (entry.State == EntityState.Detached)
             {
-                this.entitySet.Attach(entity);
+                this.DbSet.Attach(entity);
             }
 
             entry.State = state;
