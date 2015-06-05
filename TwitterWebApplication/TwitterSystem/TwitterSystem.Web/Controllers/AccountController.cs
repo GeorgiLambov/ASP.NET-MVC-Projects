@@ -13,6 +13,7 @@ using TwitterSystem.Web.Models;
 namespace TwitterSystem.Web.Controllers
 {
     using TwitterSystem.Models;
+    using ViewModels.Account;
 
     [Authorize]
     public class AccountController : Controller

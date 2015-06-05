@@ -5,6 +5,7 @@
     using Data.UowData;
     using Microsoft.AspNet.Identity;
     using TwitterSystem.Models;
+    using ViewModels.Alerts;
 
     public abstract class BaseController : Controller
     {
@@ -27,14 +28,14 @@
             get { return this.currentUser ?? (this.currentUser = this.Data.Users.Find(this.CurrentUserId)); }
         }
 
-        //protected void AddAlert(string message, AlertType type)
-        //{
-        //    if (this.TempData["alerts"] == null)
-        //    {
-        //        this.TempData["alerts"] = new HashSet<AlertViewModel>();
-        //    }
+        protected void AddAlert(string message, AlertType type)
+        {
+            if (this.TempData["alerts"] == null)
+            {
+                this.TempData["alerts"] = new HashSet<AlertViewModel>();
+            }
 
-        //    ((HashSet<AlertViewModel>)this.TempData["alerts"]).Add(new AlertViewModel(message, type));
-        //}
+            ((HashSet<AlertViewModel>)this.TempData["alerts"]).Add(new AlertViewModel(message, type));
+        }
     }
 }

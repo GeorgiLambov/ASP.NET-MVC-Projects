@@ -86,7 +86,7 @@ namespace TwitterSystem.Data.Migrations
             var tweet2 = new Tweet
             {
                 TweetedAt = DateTime.Now,
-                Text = "Любовта мести планини, но някой трябва да плати за багера.",
+                Text = "“Любовта не се търси, тя сама те намира.” Гинка, 48 годишна с 9 котки...",
                 RetweetCount = 0,
                 SharedCount = 0,
                 Owner = context.Users.First()
@@ -95,7 +95,7 @@ namespace TwitterSystem.Data.Migrations
             var tweet3 = new Tweet()
             {
                 TweetedAt = DateTime.Now,
-                Text = "Аз съм ранима жена. Kогато плача, не виждам кого удрям с лопатата.",
+                Text = "Нямам търпение да стана пенсионер, за да ставам рано и да опипвам хляба в магазина.",
                 RetweetCount = 0,
                 SharedCount = 0,
                 Owner = context.Users.First()
@@ -104,7 +104,7 @@ namespace TwitterSystem.Data.Migrations
             var tweet4 = new Tweet()
             {
                 TweetedAt = DateTime.Now,
-                Text = "Флиртът е капризът на изморените от себе си хора.",
+                Text = "Всеки път като видя гоблен си казвам ебати ниската резолюция.",
                 RetweetCount = 0,
                 SharedCount = 0,
                 Owner = context.Users.First()
@@ -113,7 +113,7 @@ namespace TwitterSystem.Data.Migrations
             var tweet5 = new Tweet()
             {
                 TweetedAt = DateTime.Now,
-                Text = "Никога не спори с жена, почвай директно да си събираш багажа.",
+                Text = "Имаш лице за радио водещ",
                 RetweetCount = 0,
                 SharedCount = 0,
                 Owner = context.Users.First()

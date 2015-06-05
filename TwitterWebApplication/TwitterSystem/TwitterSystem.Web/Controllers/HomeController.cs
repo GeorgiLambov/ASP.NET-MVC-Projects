@@ -6,8 +6,9 @@
     using AutoMapper.QueryableExtensions;
     using Data.UowData;
     using Infrastructure.Helpers;
-    using Models;
-
+    using ViewModels;
+    using ViewModels.Tweets;
+   
     public class HomeController : BaseController
     {
         private const int TweetsPerPage = 10;
@@ -17,7 +18,7 @@
         {
         }
 
-        [OutputCache(Duration = 30, VaryByParam = "page")]
+        //[OutputCache(Duration = 30, VaryByParam = "page")]
         public ActionResult Index(int page = 1)
         {
             if (this.User.IsLoggedIn())
