@@ -4,37 +4,37 @@
     using System.Linq;
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
-    using Data.Contracts;
-    using ViewModels;
-    using ViewModels.Tweets;
+    using Data.UowData;
+    using Infrastructure.Helpers;
+    using Models;
 
     public class HomeController : BaseController
     {
-        private const int pageSize = 10;
+        private const int TweetsPerPage = 10;
 
-        public HomeController(ITweeterData data)
+        public HomeController(ITwitterData data)
             : base(data)
         {
         }
 
+        [OutputCache(Duration = 30, VaryByParam = "page")]
         public ActionResult Index(int page = 1)
         {
-            
-            //if (this.User.IsLoggedIn())
-            //{
-                
-            //}
+            if (this.User.IsLoggedIn())
+            {
+                return this.RedirectToAction("Index", "User");
+            }
 
-            var totalPages = (int)Math.Ceiling(this.Data.Tweets.All().Count() / (decimal)pageSize);
+            var totalPages = (int)Math.Ceiling(this.Data.Tweets.All().Count() / (decimal)TweetsPerPage);
             var latestTweets = this.Data.Tweets
                 .All()
-                .OrderByDescending(t => t.DateOfCreate)
-                .Skip(pageSize * (page - 1))
-                .Take(pageSize)
+                .OrderByDescending(t => t.TweetedAt)
+                .Skip(TweetsPerPage * (page - 1))
+                .Take(TweetsPerPage)
                 .Project()
                 .To<TweetViewModel>();
 
-            var homeViewModel = new HomeViewModel
+            var indexViewModel = new IndexViewModel
             {
                 Tweets = latestTweets,
                 PaginationModel = new PaginationViewModel
@@ -44,7 +44,7 @@
                 }
             };
 
-            return this.View(homeViewModel);
+            return this.View(indexViewModel);
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿namespace TwitterSystem.Web.Infrastructure.Mapping
+﻿namespace Twitter.Web.Infrastructure.Mapping
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
-    using Twitter.Web.Infrastructure.Mapping;
 
     public static class AutoMapperConfig
     {

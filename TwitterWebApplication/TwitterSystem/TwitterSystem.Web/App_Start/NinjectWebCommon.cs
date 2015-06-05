@@ -4,9 +4,10 @@
 namespace TwitterSystem.Web.App_Start
 {
     using System;
+    using System.Data.Entity;
     using System.Web;
     using Data;
-    using Data.Contracts;
+    using Data.UowData;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
     using Ninject;
@@ -62,8 +63,9 @@ namespace TwitterSystem.Web.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.Bind<ITweeterData>().To<TweeterData>();
-            kernel.Bind<ITweeterDbContext>().To<TweetterDbContext>();
+            kernel.Bind<DbContext>().To<TwitterDbContext>();
+            kernel.Bind<ITwitterDbContext>().To<TwitterDbContext>();
+            kernel.Bind<ITwitterData>().To<TwitterData>();
         }        
     }
 }

@@ -4,12 +4,12 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
     using Data;
-    using Data.Models;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin;
     using Microsoft.Owin.Security;
+    using TwitterSystem.Models;
 
     public class EmailService : IIdentityMessageService
     {
@@ -39,7 +39,7 @@
 
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context) 
         {
-            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<TweetterDbContext>()));
+            var manager = new ApplicationUserManager(new UserStore<User>(context.Get<TwitterDbContext>()));
             // Configure validation logic for usernames
             manager.UserValidator = new UserValidator<User>(manager)
             {
@@ -54,7 +54,7 @@
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,
-                RequireUppercase = false,
+                RequireUppercase = false
             };
 
             // Configure user lockout defaults
