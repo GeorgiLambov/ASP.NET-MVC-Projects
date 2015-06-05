@@ -1,0 +1,9 @@
+﻿@using TwitterSystem.Web.Infrastructure.Helpers
+
+@if (User.IsLoggedIn())
+{
+    <li>
+        @Html.ActionLink(User.GetUsername(), "Profile", "User", new { username = User.GetUsername() },
+      new { @class = "navbar-brand" })
+    </li>
+}

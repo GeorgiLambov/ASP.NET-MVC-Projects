@@ -1,0 +1,37 @@
+﻿@model TwitterSystem.Web.ViewModels.User.UserHomeViewModel
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h3>Add new tweet</h3>
+        @Html.EditorFor(m => m.NewTweet)
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h3>Latest tweets</h3>
+        <div id="tweets">
+            @Html.DisplayFor(m => m.Tweets)
+            @Html.DisplayFor(m => m.PaginationModel)
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function validatorParse() {
+            $('form').removeData('validator');
+            $('form').removeData('unobtrusiveValidation');
+            $.validator.unobtrusive.parse('form');
+        }
+
+        $.connection.tweets.client.friendTweeted = function (tweetId) {
+            $.get('/Tweets/GetById/' + tweetId, function (tweetDiv) {
+                $('#tweets').prepend(tweetDiv);
+            });
+        }
+    </script>
+}
