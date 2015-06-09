@@ -28,31 +28,28 @@
         public ActionResult Index(int page = 1)
         {
             var currentUser = this.Data.Users
-                .All()
-                .Include(u => u.FavouriteTweets)
-                .Include(u => u.Following)
-                .Include("Following.Tweets")
-                .First(u => u.Id == this.CurrentUserId);
+                            .All()
+                            .Include(u => u.FavouriteTweets)
+                            .Include(u => u.Following)
+                            .First(u => u.Id == this.CurrentUserId);
 
-            var latestTweets = currentUser
-                .Following
-                .AsQueryable()
-                .SelectMany(f => f.Tweets)
-                .OrderByDescending(t => t.TweetedAt);
+            var latestTweets = this.Data.Tweets
+                            .All()
+                            .Where(t => t.OwnerId == this.CurrentUserId)
+                            .OrderByDescending(t => t.TweetedAt);
 
             var totalPages = (int)Math.Ceiling(latestTweets.Count() / (decimal)TweetsPerPage);
             var tweetViewModels = latestTweets
-                .Skip(TweetsPerPage * (page - 1))
-                .Take(TweetsPerPage)
-                .Project()
-                .To<TweetViewModel>()
-                .ToList();
+                            .Skip(TweetsPerPage * (page - 1))
+                            .Take(TweetsPerPage)
+                            .Project()
+                            .To<TweetViewModel>()
+                            .ToList();
 
             TweetViewModel.SetFavouriteFlags(tweetViewModels, currentUser);
 
             var userHomeViewModel = new UserHomeViewModel
             {
-                NewTweet = new TweetInputModel(),
                 Tweets = tweetViewModels,
                 PaginationModel = new PaginationViewModel
                 {
@@ -62,6 +59,13 @@
             };
 
             return this.View(userHomeViewModel);
+        }
+
+        [Authorize]
+        public ActionResult AddNewTweet()
+        {
+            var userNewTweetModel = new UserAddNewTweetModel();
+            return this.View(userNewTweetModel);
         }
 
         [ActionName("Profile")]

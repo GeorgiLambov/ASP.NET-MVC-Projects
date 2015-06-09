@@ -1,7 +1,7 @@
 ﻿namespace TwitterSystem.Web.ViewModels.Notifications
 {
     using System;
-    using Twitter.Web.Infrastructure.Mapping;
+    using Infrastructure.Mapping;
     using TwitterSystem.Models;
 
     public class NotificationViewModel : IMapFrom<Notification>

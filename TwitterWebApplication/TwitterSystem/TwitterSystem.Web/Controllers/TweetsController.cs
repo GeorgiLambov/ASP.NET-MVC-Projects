@@ -94,15 +94,17 @@
             return this.Content("Tweet retweeted successfully.");
         }
 
+        [HttpGet]
+        [Authorize]
         public ActionResult GetUserTweets(string username)
         {
             var tweets = this.Data.Tweets
-                .All()
-                .Where(t => t.Owner.UserName == username)
-                .OrderByDescending(t => t.TweetedAt)
-                .Project()
-                .To<TweetViewModel>()
-                .ToList();
+                         .All()
+                         .Where(t => t.Owner.UserName == username)
+                         .OrderByDescending(t => t.TweetedAt)
+                         .Project()
+                         .To<TweetViewModel>()
+                         .ToList();
 
             TweetViewModel.SetFavouriteFlags(tweets, this.CurrentUser);
 

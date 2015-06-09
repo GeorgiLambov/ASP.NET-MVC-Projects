@@ -1,5 +1,4 @@
-﻿@using TwitterSystem.Web.Infrastructure.Helpers
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,8 +22,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("My Tweets", "Index", "User")</li>
+                        <li>@Html.ActionLink("Add Tweet", "AddNewTweet", "User")</li>
+                    }
                 </ul>
+
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

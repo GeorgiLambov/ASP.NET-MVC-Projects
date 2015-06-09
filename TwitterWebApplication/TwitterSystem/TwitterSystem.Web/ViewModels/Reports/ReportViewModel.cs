@@ -3,7 +3,7 @@
     using System;
 
     using AutoMapper;
-    using Twitter.Web.Infrastructure.Mapping;
+    using Infrastructure.Mapping;
     using TwitterSystem.Models;
 
     public class ReportViewModel : IMapFrom<Report>, IHaveCustomMappings

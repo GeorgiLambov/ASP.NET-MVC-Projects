@@ -1,4 +1,4 @@
-﻿namespace Twitter.Web.Infrastructure.Mapping
+﻿namespace TwitterSystem.Web.Infrastructure.Mapping
 {
     public interface IMapFrom<T>
     {

@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Data.UowData;
-    using Infrastructure.Helpers;
     using ViewModels;
     using ViewModels.Tweets;
    
@@ -21,10 +20,10 @@
         //[OutputCache(Duration = 30, VaryByParam = "page")]
         public ActionResult Index(int page = 1)
         {
-            if (this.User.IsLoggedIn())
-            {
-                return this.RedirectToAction("Index", "User");
-            }
+            //if (this.User.IsLoggedIn())
+            //{
+            //    return this.RedirectToAction("Index", "User");
+            //}
 
             var totalPages = (int)Math.Ceiling(this.Data.Tweets.All().Count() / (decimal)TweetsPerPage);
             var latestTweets = this.Data.Tweets

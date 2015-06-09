@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;
-    using Twitter.Web.Infrastructure.Mapping;
+    using Infrastructure.Mapping;
     using TwitterSystem.Models;
 
     public class TweetViewModel : IMapFrom<Tweet>, IHaveCustomMappings

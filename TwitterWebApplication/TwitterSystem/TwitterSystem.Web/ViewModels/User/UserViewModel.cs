@@ -1,7 +1,7 @@
 ﻿namespace TwitterSystem.Web.ViewModels.User
 {
+    using Infrastructure.Mapping;
     using TwitterSystem.Models;
-    using Twitter.Web.Infrastructure.Mapping;
 
     public class UserViewModel : IMapFrom<User>
     {

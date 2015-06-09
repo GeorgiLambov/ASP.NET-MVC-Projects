@@ -1,4 +1,4 @@
-﻿namespace Twitter.Web.Infrastructure.Mapping
+﻿namespace TwitterSystem.Web.Infrastructure.Mapping
 {
     using AutoMapper;
 

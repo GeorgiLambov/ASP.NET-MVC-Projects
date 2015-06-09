@@ -1,4 +1,4 @@
-﻿namespace Twitter.Web.Infrastructure.Mapping
+﻿namespace TwitterSystem.Web.Infrastructure.Mapping
 {
     using System;
     using System.Collections.Generic;

@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using AutoMapper.QueryableExtensions;
     using Data.UowData;
+    using EntityFramework.Extensions;
     using TwitterSystem.Models;
     using ViewModels.Notifications;
 
@@ -30,7 +31,7 @@
                 Notifications = notifications.Project().To<NotificationViewModel>().ToList()
             };
 
-            //notifications.Update(n => new Notification { IsRead = true });
+            notifications.Update(n => new Notification { IsRead = true });
 
             return this.View(notificationsHomeViewModel);
         }
