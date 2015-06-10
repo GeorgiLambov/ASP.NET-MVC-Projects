@@ -7,17 +7,17 @@
     using Data.UowData;
     using ViewModels;
     using ViewModels.Tweets;
-   
+
     public class HomeController : BaseController
     {
-        private const int TweetsPerPage = 10;
+        private const int TweetsPerPage = 5;
 
         public HomeController(ITwitterData data)
             : base(data)
         {
         }
 
-        //[OutputCache(Duration = 30, VaryByParam = "page")]
+        [OutputCache(Duration = 30, VaryByParam = "page")]
         public ActionResult Index(int page = 1)
         {
             //if (this.User.IsLoggedIn())
@@ -45,6 +45,11 @@
             };
 
             return this.View(indexViewModel);
+        }
+
+        public ActionResult Error()
+        {
+            return this.View();
         }
     }
 }

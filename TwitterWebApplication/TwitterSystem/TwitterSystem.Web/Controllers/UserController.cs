@@ -17,7 +17,7 @@
 
     public class UserController : BaseController
     {
-        private const int TweetsPerPage = 10;
+        private const int TweetsPerPage = 5;
 
         public UserController(ITwitterData data)
             : base(data)

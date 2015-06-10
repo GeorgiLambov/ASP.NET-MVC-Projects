@@ -7,6 +7,7 @@
     using TwitterSystem.Models;
     using ViewModels.Alerts;
 
+    [HandleError]
     public abstract class BaseController : Controller
     {
         private User currentUser;

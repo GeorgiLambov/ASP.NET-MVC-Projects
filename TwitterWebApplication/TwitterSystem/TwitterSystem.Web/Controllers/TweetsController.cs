@@ -114,12 +114,12 @@
         public ActionResult GetFavouriteTweets(string username)
         {
             var tweets = this.Data.Tweets
-                .All()
-                .Where(t => t.FavouredBy.Any(u => u.UserName == username))
-                .OrderByDescending(t => t.TweetedAt)
-                .Project()
-                .To<TweetViewModel>()
-                .ToList();
+                            .All()
+                            .Where(t => t.FavouredBy.Any(u => u.UserName == username))
+                            .OrderByDescending(t => t.TweetedAt)
+                            .Project()
+                            .To<TweetViewModel>()
+                            .ToList();
 
             TweetViewModel.SetFavouriteFlags(tweets, this.CurrentUser);
 
@@ -160,6 +160,7 @@
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
+        [HttpGet]
         [Authorize]
         public ActionResult ShowReportForm(int id)
         {
