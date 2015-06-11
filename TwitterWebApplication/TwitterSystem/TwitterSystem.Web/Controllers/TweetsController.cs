@@ -116,11 +116,11 @@
 
         [HttpGet]
         [Authorize]
-        public ActionResult GetFavouriteTweets(string username, int page = 1)
+        public ActionResult GetFavouriteTweets(int page = 1)
         {
             var tweets = this.Data.Tweets
                             .All()
-                            .Where(t => t.FavouredBy.Any(u => u.UserName == username))
+                            .Where(t => t.FavouredBy.Any(u => u.Id == this.CurrentUserId))
                             .OrderByDescending(t => t.TweetedAt)
                             .Project()
                             .To<TweetViewModel>()
@@ -146,8 +146,8 @@
             this.Data.SaveChanges();
             NotificationsHub.OnNotificationAdded(tweet.OwnerId);
 
-            this.AddAlert("Tweet posted successfully", AlertType.Success);
-            return this.RedirectToAction("Index", "User", new { username = this.User.GetUsername() });
+            this.AddAlert("Tweet added to favorite successfully", AlertType.Success);
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
         [HttpPost]
@@ -163,6 +163,7 @@
             this.CurrentUser.FavouriteTweets.Remove(tweet);
             this.Data.SaveChanges();
 
+            this.AddAlert("Tweet removed from favorite successfully", AlertType.Success);
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 

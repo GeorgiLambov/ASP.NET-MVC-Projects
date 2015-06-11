@@ -11,7 +11,7 @@
             </li>
             <li class="tab">
                 @Ajax.ActionLink("Favourite Tweets", "GetFavouriteTweets", "Tweets",
-                         new { username = this.User.GetUsername(), page = 1 },
+                         new { page = 1 },
                     new AjaxOptions { UpdateTargetId = "user-profile-content", HttpMethod = "GET", InsertionMode = InsertionMode.Replace })
             </li>
             <li class="tab">

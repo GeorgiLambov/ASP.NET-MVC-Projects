@@ -27,11 +27,11 @@
         [Authorize]
         public ActionResult Index(int page = 1)
         {
-            var currentUser = this.Data.Users
-                            .All()
-                            .Include(u => u.FavouriteTweets)
-                            .Include(u => u.Following)
-                            .First(u => u.Id == this.CurrentUserId);
+            //var currentUser = this.Data.Users
+            //                .All()
+            //                .Include(u => u.FavouriteTweets)
+            //                .Include(u => u.Following)
+            //                .First(u => u.Id == this.CurrentUserId);
 
             var latestTweets = this.Data.Tweets
                             .All()
@@ -46,7 +46,7 @@
                             .To<TweetViewModel>()
                             .ToList();
 
-            TweetViewModel.SetFavouriteFlags(tweetViewModels, currentUser);
+            TweetViewModel.SetFavouriteFlags(tweetViewModels, this.CurrentUser);
 
             var homeViewModel = new IndexViewModel
             {
@@ -83,11 +83,9 @@
                 return this.HttpNotFound();
             }
 
-            user.IsCurrentUser = this.User.IsLoggedIn() &&
-                this.User.GetUsername() == user.UserName;
-            user.IsFollowedByCurrentUser = !user.IsCurrentUser &&
-                this.User.IsLoggedIn() &&
-                this.Data.Users
+            user.IsCurrentUser = this.User.IsLoggedIn() && this.User.GetUsername() == user.UserName;
+            user.IsFollowedByCurrentUser = !user.IsCurrentUser && this.User.IsLoggedIn() &&
+                    this.Data.Users
                     .All()
                     .Include(u => u.Following)
                     .First(x => x.Id == this.CurrentUserId)

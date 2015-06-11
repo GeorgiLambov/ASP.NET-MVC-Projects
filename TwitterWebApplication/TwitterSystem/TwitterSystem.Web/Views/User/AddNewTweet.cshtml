@@ -19,10 +19,10 @@
             $.validator.unobtrusive.parse('form');
         }
 
-        //$.connection.tweets.client.friendTweeted = function (tweetId) {
-        //    $.get('/Tweets/GetById/' + tweetId, function (tweetDiv) {
-        //        $('#tweets').prepend(tweetDiv);
-        //    });
-        //}
+        $.connection.tweets.client.friendTweeted = function (tweetId) {
+            $.get('/Tweets/GetById/' + tweetId, function (tweetDiv) {
+                $('#tweets').prepend(tweetDiv);
+            });
+        }
     </script>
 }
