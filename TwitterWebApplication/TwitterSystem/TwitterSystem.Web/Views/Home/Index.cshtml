@@ -6,10 +6,7 @@
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <h3>Latest tweets</h3>
-        <div id="tweets">
-            @Html.DisplayFor(m => m.Tweets)
-            @Html.DisplayFor(m => m.PaginationModel)
-        </div>
+        @Html.Partial("_TweetList")
     </div>
 </div>
 

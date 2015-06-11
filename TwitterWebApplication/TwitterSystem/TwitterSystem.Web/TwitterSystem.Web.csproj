@@ -248,7 +248,6 @@
     <Compile Include="ViewModels\Reports\ReportViewModel.cs" />
     <Compile Include="ViewModels\Tweets\TweetViewModel.cs" />
     <Compile Include="ViewModels\User\UserAddNewTweetModel.cs" />
-    <Compile Include="ViewModels\User\UserHomeViewModel.cs" />
     <Compile Include="ViewModels\User\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -372,7 +371,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
-    <Content Include="Views\Tweets\_TweetList.cshtml" />
+    <Content Include="Views\Shared\_TweetList.cshtml" />
     <Content Include="Views\Shared\_UserProfile.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlertViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NotificationViewModel.cshtml" />

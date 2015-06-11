@@ -48,7 +48,7 @@
 
             TweetViewModel.SetFavouriteFlags(tweetViewModels, currentUser);
 
-            var userHomeViewModel = new UserHomeViewModel
+            var homeViewModel = new IndexViewModel
             {
                 Tweets = tweetViewModels,
                 PaginationModel = new PaginationViewModel
@@ -58,7 +58,7 @@
                 }
             };
 
-            return this.View(userHomeViewModel);
+            return this.View(homeViewModel);
         }
 
         [Authorize]

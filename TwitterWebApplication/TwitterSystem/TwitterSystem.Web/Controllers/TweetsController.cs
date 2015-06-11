@@ -11,11 +11,14 @@
     using Infrastructure.Helpers;
     using InputModels;
     using TwitterSystem.Models;
+    using ViewModels;
     using ViewModels.Alerts;
     using ViewModels.Tweets;
 
     public class TweetsController : BaseController
     {
+        private const int TweetsPerPage = 5;
+
         public TweetsController(ITwitterData data)
             : base(data)
         {
@@ -37,7 +40,7 @@
         [ValidateAntiForgeryToken]
         public ActionResult AddTweet(TweetInputModel newTweet)
         {
-            if (this.ModelState.IsValid)
+            if (this.ModelState.IsValid && newTweet != null)
             {
                 var tweet = new Tweet
                 {
@@ -96,22 +99,24 @@
 
         [HttpGet]
         [Authorize]
-        public ActionResult GetUserTweets(string username)
+        public ActionResult GetUserTweets(int page = 1)
         {
             var tweets = this.Data.Tweets
                          .All()
-                         .Where(t => t.Owner.UserName == username)
+                         .Where(t => t.OwnerId == this.CurrentUserId)
                          .OrderByDescending(t => t.TweetedAt)
                          .Project()
                          .To<TweetViewModel>()
                          .ToList();
 
-            TweetViewModel.SetFavouriteFlags(tweets, this.CurrentUser);
+            var indexViewModel = GetPagitration(page, tweets);
 
-            return this.PartialView("_TweetList", tweets);
+            return this.PartialView("_TweetList", indexViewModel);
         }
 
-        public ActionResult GetFavouriteTweets(string username)
+        [HttpGet]
+        [Authorize]
+        public ActionResult GetFavouriteTweets(string username, int page = 1)
         {
             var tweets = this.Data.Tweets
                             .All()
@@ -121,9 +126,9 @@
                             .To<TweetViewModel>()
                             .ToList();
 
-            TweetViewModel.SetFavouriteFlags(tweets, this.CurrentUser);
+            var indexViewModel = GetPagitration(page, tweets);
 
-            return this.PartialView("_TweetList", tweets);
+            return this.PartialView("_TweetList", indexViewModel);
         }
 
         [HttpPost]
@@ -141,7 +146,8 @@
             this.Data.SaveChanges();
             NotificationsHub.OnNotificationAdded(tweet.OwnerId);
 
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
+            this.AddAlert("Tweet posted successfully", AlertType.Success);
+            return this.RedirectToAction("Index", "User", new { username = this.User.GetUsername() });
         }
 
         [HttpPost]
@@ -206,6 +212,24 @@
                 .ToList();
 
             return followerIds;
+        }
+
+        private IndexViewModel GetPagitration(int page, List<TweetViewModel> tweets)
+        {
+            TweetViewModel.SetFavouriteFlags(tweets, this.CurrentUser);
+
+            var totalPages = (int)Math.Ceiling(tweets.Count() / (decimal)TweetsPerPage);
+            var indexViewModel = new IndexViewModel
+            {
+                Tweets = tweets,
+                PaginationModel = new PaginationViewModel
+                {
+                    CurrentPage = page,
+                    TotalPages = totalPages
+                }
+            };
+
+            return indexViewModel;
         }
     }
 }

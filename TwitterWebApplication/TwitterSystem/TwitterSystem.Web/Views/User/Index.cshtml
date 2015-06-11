@@ -1,16 +1,46 @@
-﻿@model TwitterSystem.Web.ViewModels.User.UserHomeViewModel
-
-@{
+﻿@{
     ViewBag.Title = "Hi " + this.User.GetUsername();
 }
 
 <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <h3>Latest tweets</h3>
-        <div id="tweets">
-            @Html.DisplayFor(m => m.Tweets)
-            @Html.DisplayFor(m => m.PaginationModel)
-        </div>
-    </div>
+    <nav class="col-md-8 col-md-offset-2">
+        <ul class="nav nav-pills nav-justified">
+            <li class="tab active">
+                @Ajax.ActionLink("Tweets", "GetUserTweets", "Tweets",
+                    new AjaxOptions { UpdateTargetId = "user-profile-content", HttpMethod = "GET", InsertionMode = InsertionMode.Replace })
+            </li>
+            <li class="tab">
+                @Ajax.ActionLink("Favourite Tweets", "GetFavouriteTweets", "Tweets",
+                         new { username = this.User.GetUsername(), page = 1 },
+                    new AjaxOptions { UpdateTargetId = "user-profile-content", HttpMethod = "GET", InsertionMode = InsertionMode.Replace })
+            </li>
+            <li class="tab">
+                @Ajax.ActionLink("Followers", "GetFollowers", "User",
+                         new { username = this.User.GetUsername() },
+                    new AjaxOptions { UpdateTargetId = "user-profile-content", HttpMethod = "GET", InsertionMode = InsertionMode.Replace })
+            </li>
+            <li class="tab">
+                @Ajax.ActionLink("Following", "GetFollowing", "User",
+                         new { username = this.User.GetUsername() },
+                    new AjaxOptions { UpdateTargetId = "user-profile-content", HttpMethod = "GET", InsertionMode = InsertionMode.Replace })
+            </li>
+        </ul>
+    </nav>
+</div>
+<br />
+<div class="row">
+    <section class="col-md-8 col-md-offset-2" id="user-profile-content">
+        @Html.Partial("_TweetList")
+    </section>
 </div>
 
+@section scripts
+{
+    <script>
+        $('li.tab.active>a').click();
+        $('li.tab').click(function () {
+            $('.tab').removeClass('active');
+            $(this).addClass('active');
+        });
+    </script>
+}

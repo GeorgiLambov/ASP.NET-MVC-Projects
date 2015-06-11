@@ -1,7 +1,7 @@
 ﻿namespace TwitterSystem.Web.ViewModels
 {
     using System.Collections.Generic;
-    
+
     using Tweets;
 
     public class IndexViewModel
