@@ -1,6 +1,4 @@
-﻿@using TwitterSystem.Web.Infrastructure.Helpers
-
-@if (User.IsLoggedIn())
+﻿@if (User.IsLoggedIn())
 {
     <li>
         @Html.ActionLink(User.GetUsername(), "Profile", "User", new { username = User.GetUsername() },

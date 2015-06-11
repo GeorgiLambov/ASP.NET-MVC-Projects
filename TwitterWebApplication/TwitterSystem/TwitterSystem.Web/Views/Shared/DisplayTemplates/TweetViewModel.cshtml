@@ -2,7 +2,10 @@
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        @Model.Username tweeted at @Model.TweetedAt.ToString("HH:mm:ss dd.MM.yyyy")
+        <span class="badge">
+            @Html.ActionLink(Model.Username, "Twitter", "User", new { username = Model.Username }, null)
+        </span>
+        tweeted at @Model.TweetedAt.ToString("HH:mm:ss dd.MM.yyyy")
     </div>
     <div class="panel-body">
         @Model.Text
@@ -22,12 +25,21 @@
             }
 
             @Ajax.ActionLink("[retweet]", "Retweet", "Tweets", new { id = Model.Id },
-                new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "tweet-content-" + Model.Id,
-                    InsertionMode = InsertionMode.Replace })
+                new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    UpdateTargetId = "tweet-content-" + Model.Id,
+                    InsertionMode = InsertionMode.Replace
+                })
 
             @Ajax.ActionLink("[report]", "ShowReportForm", "Tweets", new { id = Model.Id },
-                new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "tweet-content-" + Model.Id, 
-                    InsertionMode = InsertionMode.Replace, OnSuccess = "validatorParse" })
+                new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = "tweet-content-" + Model.Id,
+                    InsertionMode = InsertionMode.Replace,
+                    OnSuccess = "validatorParse"
+                })
 
             <div id="tweet-content-@Model.Id"></div>
         </div>

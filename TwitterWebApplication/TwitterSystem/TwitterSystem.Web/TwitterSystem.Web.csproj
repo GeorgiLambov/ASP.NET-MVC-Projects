@@ -372,7 +372,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\Shared\_TweetList.cshtml" />
-    <Content Include="Views\Shared\_UserProfile.cshtml" />
+    <Content Include="Views\User\_UserProfile.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlertViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NotificationViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PaginationViewModel.cshtml" />
@@ -381,7 +381,7 @@
     <Content Include="Views\Shared\EditorTemplates\ReportInputModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TweetInputModel.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\Twitter.cshtml" />
     <Content Include="Views\User\_FollowUser.cshtml" />
     <Content Include="Views\User\_UsersList.cshtml" />
     <Content Include="Scripts\kendo\jquery.min.map" />

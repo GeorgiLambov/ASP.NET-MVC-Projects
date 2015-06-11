@@ -27,16 +27,10 @@
         [Authorize]
         public ActionResult Index(int page = 1)
         {
-            //var currentUser = this.Data.Users
-            //                .All()
-            //                .Include(u => u.FavouriteTweets)
-            //                .Include(u => u.Following)
-            //                .First(u => u.Id == this.CurrentUserId);
-
             var latestTweets = this.Data.Tweets
-                            .All()
-                            .Where(t => t.OwnerId == this.CurrentUserId)
-                            .OrderByDescending(t => t.TweetedAt);
+                                      .All()
+                                      .Where(t => t.OwnerId == this.CurrentUserId)
+                                      .OrderByDescending(t => t.TweetedAt);
 
             var totalPages = (int)Math.Ceiling(latestTweets.Count() / (decimal)TweetsPerPage);
             var tweetViewModels = latestTweets
@@ -68,6 +62,7 @@
             return this.View(userNewTweetModel);
         }
 
+        [Authorize]
         [ActionName("Profile")]
         public ActionResult UserProfile(string username)
         {
@@ -77,6 +72,46 @@
                 .Project()
                 .To<UserViewModel>()
                 .FirstOrDefault();
+
+            //var currentUser = this.Data.Users
+            //                .All()
+            //                .Include(u => u.FavouriteTweets)
+            //                .Include(u => u.Following)
+            //                .First(u => u.Id == this.CurrentUserId);
+
+            if (user == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            user.IsCurrentUser = this.User.IsLoggedIn() && this.User.GetUsername() == user.UserName;
+            user.IsFollowedByCurrentUser = !user.IsCurrentUser && this.User.IsLoggedIn() &&
+                    this.Data.Users
+                    .All()
+                    .Include(u => u.Following)
+                    .First(x => x.Id == this.CurrentUserId)
+                    .Following
+                    .Any(u => u.UserName == user.UserName);
+
+            return this.View(user);
+        } 
+        
+        [Authorize]
+        [ActionName("Twitter")]
+        public ActionResult TweetOwner(string username)
+        {
+            var user = this.Data.Users
+                .All()
+                .Where(u => u.UserName == username)
+                .Project()
+                .To<UserViewModel>()
+                .FirstOrDefault();
+
+            //var currentUser = this.Data.Users
+            //                .All()
+            //                .Include(u => u.FavouriteTweets)
+            //                .Include(u => u.Following)
+            //                .First(u => u.Id == this.CurrentUserId);
 
             if (user == null)
             {
