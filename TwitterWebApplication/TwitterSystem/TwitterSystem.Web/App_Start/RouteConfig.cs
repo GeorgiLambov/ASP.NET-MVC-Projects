@@ -13,13 +13,13 @@
                 name: "Profile",
                 url: "Profile/{username}",
                 defaults: new { controller = "User", action = "Profile", username = UrlParameter.Optional }
-            );
+           );
 
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+             );
         }
     }
 }

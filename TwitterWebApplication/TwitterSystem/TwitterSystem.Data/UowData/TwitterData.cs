@@ -26,6 +26,8 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
+        public DbContext Context { get; private set; }
+
         public IRepository<User> Users
         {
             get { return this.GetRepository<User>(); }

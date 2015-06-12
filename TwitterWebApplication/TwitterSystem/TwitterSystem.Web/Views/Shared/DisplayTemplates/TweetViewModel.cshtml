@@ -3,7 +3,7 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <span class="badge">
-            @Html.ActionLink(Model.Username, "Twitter", "User", new { username = Model.Username }, null)
+            @Html.ActionLink(Model.Username, "Profile", "User", new { username = Model.Username }, null)
         </span>
         tweeted at @Model.TweetedAt.ToString("HH:mm:ss dd.MM.yyyy")
     </div>

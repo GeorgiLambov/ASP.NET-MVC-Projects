@@ -213,6 +213,10 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+    <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Administration\Controllers\TweetsDetailsController.cs" />
+    <Compile Include="Areas\Administration\ViewModel\TweetsDetails\TweetsDetailsViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -313,6 +317,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\kendo\images\kendoui.ttf" />
     <Content Include="Content\kendo\images\kendoui.woff" />
+    <Content Include="Areas\Administration\Views\web.config" />
+    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Administration\Views\TweetsDetails\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -332,7 +340,6 @@
     <Content Include="Scripts\kendo\kendo.all.min.js" />
     <Content Include="Scripts\kendo\kendo.aspnetmvc.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\notificationsListener.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.matchmedia.addListener.js" />
@@ -372,22 +379,21 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Notifications\Index.cshtml" />
     <Content Include="Views\Shared\_TweetList.cshtml" />
-    <Content Include="Views\User\_UserProfile.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\AlertViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NotificationViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\PaginationViewModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\TweetViewModel.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\UserViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReportInputModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TweetInputModel.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\User\Twitter.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\_FollowUser.cshtml" />
     <Content Include="Views\User\_UsersList.cshtml" />
     <Content Include="Scripts\kendo\jquery.min.map" />
     <Content Include="Scripts\kendo\kendo.all.min.js.map" />
     <Content Include="Scripts\kendo\kendo.aspnetmvc.min.js.map" />
     <Content Include="Views\User\AddNewTweet.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UserViewModel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />
